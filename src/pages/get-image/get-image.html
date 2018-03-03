@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Get Image</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <img [src]="imgSrc" (click)="downloadImage()"/>
+    <ion-row no-padding>
+      <ion-col text-center>
+        <button ion-button icon-only (click)="startScan()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

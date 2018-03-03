@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Share Image</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <img [hidden]="!imageState" [src]="imgSrc"/>
+    <img [hidden]="imageState" [src]="'http://www.barcodes4.me/barcode/qr/my-image.jpg?size=8&value=' + imgSrc"/>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small icon-start (click)="imageState = true">
+          <ion-icon name="image"></ion-icon>
+          Image
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button icon-only (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small icon-start (click)="imageState = false">
+          <ion-icon name="barcode"></ion-icon>
+          Barcode
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

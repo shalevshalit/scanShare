@@ -1,26 +1,43 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Scan-Share
+## Android
 
-## How to use this template
+1. Create app with ionic 
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+```
+ionic cordova build android --prod --release
+```
+2. Create key 
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
+```
+keytool -genkey -v -keystore my-release-key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
 ```
 
-Then, to run it, cd into `mySideMenu` and run:
+3. Copy released file to root path
 
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
+```
+cp ./platforms/android/build/outputs/apk/android-release-unsigned.apk android-release-unsigned.apk
 ```
 
-Substitute ios for android if not on a Mac.
+4. Sign apk with **my-release-key.jks** and enter your password
 
+```
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk my-alias
+```
+
+5. Optimize app
+
+```
+ ~/Library/Android/sdk/build-tools/26.0.2/zipalign -f -v 4 android-release-unsigned.apk scanShare.apk
+```
+
+## IOS
+
+
+1. Create app with ionic 
+
+```
+ionic cordova build ios --prod --release
+```
+
+2. Enter x-code and run **Product -> Archive**
+3. Click Upload and follow the steps
